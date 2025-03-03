@@ -1,0 +1,8 @@
+[
+  {
+    "id": "admin-001",
+    "username": "admin",
+    "password": "$2a$10$YOUR_HASHED_PASSWORD",
+    "role": "admin"
+  }
+]
