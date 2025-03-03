@@ -1,9 +1,9 @@
 // src/lib/auth/auth.ts
-import bcrypt from "bcryptjs"
-import { readFileSync } from "fs"
-import path from "path"
+import bcrypt from "bcryptjs";
+import { readFileSync } from "fs";
+import path from "path";
 
-const DATA_FILE = path.join(process.cwd(), 'src/lib/data/characters.json')
+const DATA_FILE = path.join(process.cwd(), 'src/lib/data/characters.json');
 
 export interface User {
     id: string
@@ -23,20 +23,20 @@ interface AuthUser extends User {
 
 export const verifyPassword = async (
     inputPassword: string,
-    hashedPassword: string
+    hashedPassword: string,
 ): Promise<boolean> => {
-    return await bcrypt.compare(inputPassword, hashedPassword)
-}
+    return await bcrypt.compare(inputPassword, hashedPassword);
+};
 
 // In src/lib/auth/auth.ts
 export const validateCredentials = async (
-    credentials?: Record<string, string>
+    credentials?: Record<string, string>,
 ): Promise<User | null> => {
     if (!credentials) return null;
 
     try {
         const users: StoredUser[] = JSON.parse(
-            readFileSync(DATA_FILE, "utf-8")
+            readFileSync(DATA_FILE, "utf-8"),
         ).filter((u: StoredUser) => u.role); // Ensure type-safe filter
 
         const user = users.find((u) => u.username === credentials.username);
@@ -50,12 +50,12 @@ export const validateCredentials = async (
                 id: user.id,
                 username: user.username,
                 role: user.role,
-                password: user.password
-            } as AuthUser
+                password: user.password,
+            } as AuthUser;
         }
     } catch (error) {
-        console.error('Validation error:', error)
+        console.error('Validation error:', error);
     }
 
-    return null
-}
+    return null;
+};
