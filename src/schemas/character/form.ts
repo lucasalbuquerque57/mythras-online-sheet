@@ -71,3 +71,5 @@ export const formSchema = z.object({
         hitLocationSchema,
     ),
 });
+
+export type CharacterFormValues = z.infer<typeof formSchema>;
